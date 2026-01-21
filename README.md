@@ -180,9 +180,10 @@ graph TD
 
 * **Framework**: Flutter (Dart)
 * **State Management**: BLoC (Business Logic Component)
-* **Local Database**: ObjectBox (High performance NoSQL)
+* **Local Database**: ObjectBox (High-performance NoSQL)
 * **Networking**: Dio
 * **AI/ML**: google_mlkit_text_recognition, speech_to_text
+* **AUTH**: Firebase Auth (Gmail, phone) firebase project is already set up, no need to set up for test run.
 
 ### Backend (API)
 
