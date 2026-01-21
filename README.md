@@ -4,7 +4,6 @@
 
 Shiksha Saathi (Education Companion) is an intelligent, offline-first mobile application designed to empower government school teachers in India. It addresses the critical gap between **teacher training** and **classroom implementation** by providing real-time, context-aware pedagogical support.
 
-![Banner Placeholder](assets/screenshots/banner.png)
 
 ---
 
