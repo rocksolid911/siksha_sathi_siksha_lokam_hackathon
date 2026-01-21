@@ -253,8 +253,51 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
+### 2. Running on a Different Machine (Network Config)
 
-### 2. RAG Indexing (Critical Step)
+If you are running the backend on a PC and the app on a physical Android device, they must be on the **same Wi-Fi network**.
+
+**Step 1: Find your PC's IP Address**
+
+* Open Command Prompt/PowerShell and run: `ipconfig`
+* Look for **IPv4 Address** (e.g., `192.168.1.45`).
+
+**Step 2: Update Backend Config**
+
+* Open `backend/.env`.
+* If .env is NOT present, create a .env file and copy-paste the contents from .env_example
+* Add your IP to `ALLOWED_HOSTS` (comma-separated):
+
+    ```ini
+    ALLOWED_HOSTS=localhost,127.0.0.1,10.0.2.2,192.168.1.45  <-- Your IP here
+    ```
+
+**Step 3: Update Flutter App Config**
+
+* Open `flutter_app/lib/core/constants/app_constants.dart`.
+* Update `apiBaseUrl` with your IP:
+
+    ```dart
+    static const String apiBaseUrl = 'http://192.168.1.45:8000/api/v1'; // <-- Replace IP here
+    ```
+
+* **Important:** Do NOT use `localhost` for physical devices.
+
+**Troubleshooting: "No route to host" Error**
+If you see this error, Windows Firewall is likely blocking incoming connections.
+
+* **Method A (Recommended):** Set your Wi-Fi network to **Private**.
+    1. Open PowerShell as *Administrator*.
+    2. Run: `Get-NetConnectionProfile` (Note the `InterfaceIndex` number).
+    3. Run: `Set-NetConnectionProfile -InterfaceIndex <Index> -NetworkCategory Private`.
+* **Method B:** Allow port 8000 in Firewall.
+
+    ```powershell
+    New-NetFirewallRule -DisplayName "Allow Django 8000" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow
+    ```
+
+
+### 3. RAG Indexing (Critical Step)
 
 To enable the AI to know about **NCF 2023 (National Curriculum Framework)**, you must index the PDF. This process:
 
