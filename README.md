@@ -268,6 +268,7 @@ To enable the AI to know about **NCF 2023 (National Curriculum Framework)**, you
 ```bash
 # Ensure PDF is in backend root (already included in submission)
 cd backend
+export DJANGO_SETTINGS_MODULE=config.settings
 python -c "from rag.indexer import index_ncf_pdf; index_ncf_pdf()"
 ```
 
