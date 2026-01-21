@@ -67,8 +67,9 @@ class ShikshaSaathiApp extends StatelessWidget {
             )..loadContext(),
           ),
           BlocProvider<LanguageCubit>(
-            create: (context) => LanguageCubit(),
-            // TODO: Load saved language in LanguageCubit or here
+            create: (context) => LanguageCubit(
+              preferencesRepository: context.read<PreferencesRepository>(),
+            ),
           ),
         ],
         child: BlocBuilder<LanguageCubit, Locale>(
@@ -114,15 +115,13 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthAuthenticated && state.profile != null) {
-          // If we have a stored preference, it might override the profile preference
-          // But for now, let's respect profile preference if not set locally?
-          // Actually, let's checking PreferenceRepository in LanguageCubit is better.
-          // For now, keeping existing logic but maybe we should rely on SetupScreen for language too.
-
+        if (state is AuthUnauthenticated) {
+          // Clear active context on logout so next user gets SetupScreen
+          context.read<ActiveContextCubit>().clearContext();
+        } else if (state is AuthAuthenticated && state.profile != null) {
           final languageCode = state.profile?['preferred_language'] ?? 'en';
-          // Only change if not already set by user manually?
-          // Keep simple: Profile language is default.
+          // Update language to match profile, this will also persist it locally
+          // due to our LanguageCubit update.
           context.read<LanguageCubit>().changeLanguage(Locale(languageCode));
         }
       },

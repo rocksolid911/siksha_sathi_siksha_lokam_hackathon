@@ -26,6 +26,12 @@ class PreferencesRepository {
     };
   }
 
+  Future<void> clearActiveContext() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_keyActiveGrade);
+    await prefs.remove(_keyActiveSubject);
+  }
+
   Future<void> savePreferredLanguage(String languageCode) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_keyPreferredLanguage, languageCode);

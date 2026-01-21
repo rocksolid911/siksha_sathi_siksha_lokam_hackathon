@@ -6,6 +6,9 @@ import '../../../core/constants/app_constants.dart';
 import 'package:shiksha_saathi/l10n/app_localizations.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import 'sos_response_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../auth/presentation/bloc/auth_bloc.dart';
+import '../../auth/presentation/bloc/auth_state.dart';
 
 /// SOS Bottom Sheet
 /// Quick help interface for teachers in emergency
@@ -331,78 +334,118 @@ class _SOSBottomSheetState extends State<SOSBottomSheet> {
 
   /// Show dialog to edit context temporarily
   void _showContextEditor() {
+    // Fetch User Profile Data using the widget's context API
+    List<String> availableGrades = [];
+    List<String> availableSubjects = [];
+
+    final authState = context.read<AuthBloc>().state;
+    if (authState is AuthAuthenticated && authState.profile != null) {
+      final profile = authState.profile!;
+
+      if (profile['grades'] != null) {
+        try {
+          if (profile['grades'] is List) {
+            availableGrades = List<String>.from(profile['grades']);
+          }
+        } catch (e) {
+          // Fallback
+        }
+      }
+
+      if (profile['subjects'] != null) {
+        try {
+          if (profile['subjects'] is List) {
+            availableSubjects = List<String>.from(profile['subjects']);
+          }
+        } catch (e) {
+          // Fallback
+        }
+      }
+    }
+
+    // Fallback defaults if profile is empty
+    if (availableGrades.isEmpty) {
+      availableGrades = List.generate(12, (i) => '${i + 1}');
+    }
+    if (availableSubjects.isEmpty) {
+      availableSubjects = [
+        'Math',
+        'Science',
+        'English',
+        'Hindi',
+        'Social Science'
+      ];
+    }
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Edit Context'),
         content: StatefulBuilder(
           builder: (context, setDialogState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Grade/Class',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  children: [
-                    '1',
-                    '2',
-                    '3',
-                    '4',
-                    '5',
-                    '6',
-                    '7',
-                    '8',
-                    '9',
-                    '10',
-                    '11',
-                    '12'
-                  ]
-                      .map((grade) => ChoiceChip(
-                            label: Text('Class $grade'),
-                            selected: _tempGrade == grade,
-                            onSelected: (selected) {
-                              setDialogState(() => _tempGrade = grade);
-                            },
-                          ))
-                      .toList(),
-                ),
-                const SizedBox(height: 16),
-                const Text('Subject',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  children:
-                      ['Math', 'Science', 'English', 'Hindi', 'Social Science']
-                          .map((subject) => ChoiceChip(
-                                label: Text(subject),
-                                selected: _tempSubject == subject,
-                                onSelected: (selected) {
-                                  setDialogState(() => _tempSubject = subject);
-                                },
-                              ))
-                          .toList(),
-                ),
-                const SizedBox(height: 16),
-                const Text('Student Count',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Slider(
-                  value: _tempStudentCount.toDouble(),
-                  min: 10,
-                  max: 100,
-                  divisions: 18,
-                  label: '$_tempStudentCount students',
-                  onChanged: (value) {
-                    setDialogState(() => _tempStudentCount = value.toInt());
-                  },
-                ),
-                Text('$_tempStudentCount students',
-                    style: AppTextStyles.bodySmall),
-              ],
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Grade/Class',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: availableGrades.map((grade) {
+                      // Check if grade already has "Class" or "Grade" prefix
+                      final label = (grade.toLowerCase().contains('class') ||
+                              grade.toLowerCase().contains('grade') ||
+                              grade.toLowerCase().contains('kiv'))
+                          ? grade
+                          : 'Class $grade';
+
+                      return ChoiceChip(
+                        label: Text(label),
+                        selected: _tempGrade == grade,
+                        onSelected: (selected) {
+                          setDialogState(() => _tempGrade = grade);
+                        },
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text('Subject',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: availableSubjects
+                        .map((subject) => ChoiceChip(
+                              label: Text(subject),
+                              selected: _tempSubject == subject,
+                              onSelected: (selected) {
+                                setDialogState(() => _tempSubject = subject);
+                              },
+                            ))
+                        .toList(),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text('Student Count',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Slider(
+                    value: _tempStudentCount.toDouble(),
+                    min: 10,
+                    max: 100,
+                    divisions: 18,
+                    label: '$_tempStudentCount students',
+                    onChanged: (value) {
+                      setDialogState(() => _tempStudentCount = value.toInt());
+                    },
+                  ),
+                  Text('$_tempStudentCount students',
+                      style: AppTextStyles.bodySmall),
+                ],
+              ),
             );
           },
         ),

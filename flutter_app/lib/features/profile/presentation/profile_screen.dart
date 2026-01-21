@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_constants.dart';
-import '../../../core/constants/app_text_styles.dart';
 
 import '../../auth/presentation/screens/login_screen.dart';
 import '../../auth/presentation/bloc/auth_bloc.dart';
@@ -415,6 +414,18 @@ class ProfileScreen extends StatelessWidget {
                     context
                         .read<LanguageCubit>()
                         .changeLanguage(Locale(newValue));
+
+                    // Update backend profile
+                    final profileState = context.read<ProfileBloc>().state;
+                    if (profileState is ProfileLoaded) {
+                      context.read<ProfileBloc>().add(
+                            ProfileUpdateRequested(
+                              profileState.profile.copyWith(
+                                preferredLanguage: newValue,
+                              ),
+                            ),
+                          );
+                    }
                   }
                 },
               ),
