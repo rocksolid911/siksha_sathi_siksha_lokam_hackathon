@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "724170416520",
+    "project_id": "sikshasathi-6c10b",
+    "storage_bucket": "sikshasathi-6c10b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724170416520:android:25a69df9de5cc1513d1a3d",
+        "android_client_info": {
+          "package_name": "com.shiksha.shiksha_saathi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724170416520-81oqqo6g1p578ui0pihpjpss5tcsvg3p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shiksha.shiksha_saathi",
+            "certificate_hash": "4512c8da06295b77ad416e9e9a855093e8dc771d"
+          }
+        },
+        {
+          "client_id": "724170416520-f0m3k26ds2e0oaijmepunrncmdobh4p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDch2PDrWSU0CCqP10imuMfgnQtPcJI1Q8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724170416520-f0m3k26ds2e0oaijmepunrncmdobh4p9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "724170416520-eu3ij0v64ldkek649iq9ep5pdq8d292q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sikshasathi.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

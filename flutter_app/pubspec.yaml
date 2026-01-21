@@ -1,0 +1,109 @@
+name: shiksha_saathi
+description: "Shiksha Saathi - AI Teaching Companion for Indian Teachers"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+  # Note: Fonts are loaded via google_fonts package
+  # No local font files needed
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STATE MANAGEMENT - BLoC
+  # ═══════════════════════════════════════════════════════════════════════════
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
+  equatable: ^2.0.7
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # NETWORKING
+  # ═══════════════════════════════════════════════════════════════════════════
+  dio: ^5.7.0
+  connectivity_plus: ^6.1.1
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # LOCAL STORAGE - ObjectBox
+  # ═══════════════════════════════════════════════════════════════════════════
+  objectbox: ^4.0.3
+  objectbox_flutter_libs: any
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # VOICE & AUDIO
+  # ═══════════════════════════════════════════════════════════════════════════
+  speech_to_text: ^7.0.0
+  flutter_tts: ^4.2.0
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # UI COMPONENTS
+  # ═══════════════════════════════════════════════════════════════════════════
+  google_fonts: ^6.2.1
+  flutter_animate: ^4.5.2
+  shimmer: ^3.0.0
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # VIDEO PLAYER (for Reels & YouTube)
+  # ═══════════════════════════════════════════════════════════════════════════
+  video_player: ^2.9.2
+  chewie: ^1.8.5
+  youtube_player_flutter: ^9.1.3
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # CAMERA & OCR (Snap Feature)
+  # ═══════════════════════════════════════════════════════════════════════════
+  image_picker: ^1.1.2
+  image_cropper: ^8.0.2
+  google_mlkit_text_recognition: ^0.13.0
+  flutter_markdown: ^0.7.3
+  share_plus: ^10.0.0
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # UTILITIES
+  # ═══════════════════════════════════════════════════════════════════════════
+  intl: ^0.20.2
+  json_annotation: ^4.9.0
+  url_launcher: ^6.2.5
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ICONS
+  # ═══════════════════════════════════════════════════════════════════════════
+  flutter_svg: ^2.0.16
+  lucide_icons: ^0.257.0
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # CUPERTINO ICONS (for iOS style)
+  # ═══════════════════════════════════════════════════════════════════════════
+  cupertino_icons: ^1.0.8
+  firebase_core: ^4.4.0
+  firebase_auth: ^6.1.4
+  google_sign_in: ^7.2.0
+  firebase_messaging: ^16.1.1
+  cloud_firestore: ^6.1.2
+  flutter_local_notifications: ^19.5.0
+  uuid: ^4.5.2
+  shared_preferences: ^2.5.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  
+  # Code generation
+  build_runner: ^2.4.13
+  objectbox_generator: ^4.0.3
+  json_serializable: ^6.8.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/offline/

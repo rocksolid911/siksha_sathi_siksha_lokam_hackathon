@@ -1,0 +1,889 @@
+Theme 1
+A teacher’s narration of the problem
+
+Sunita, a Primary Teacher at a rural school in Jharkhand, stands before a Class 4 room where students are at four different learning levels. Today, she is attempting a new "group-based subtraction" activity she learned in a state workshop three months ago. Mid-way through, the class descends into chaos; the advanced students have finished and are disruptive, while the struggling group is paralyzed by a conceptual block regarding "zero" in the tens place.
+
+Sunita feels the familiar surge of "implementation anxiety." She needs a strategy now—a way to pivot the management of the room and a specific pedagogical "hook" to explain the math concept. She looks at her calendar. Her Cluster Resource Person (CRP) visited two weeks ago, but with spending just about 20-minute in the class due to his own workload his only feedback was a generic note in the logbook: "Ensure all students are engaged and there can be more Teaching learning materials in the classroom from the objects around". There were no specific ways and ideas for the same that could be discussed.
+
+His next visit is at least three weeks away. Sunita has no peer to "knock on the door" of, as she is the only Class 4 teacher for miles. Without a "just-in-time" mechanism to raise her doubt and receive a personalized, context-aware solution, the pressure of the upcoming terminal assessment takes over. To regain control, she abandons the activity, picks up the chalk, and tells the students to simply copy the borrowing algorithm from the board. The "spark" of innovation dies, replaced by a return to rote instruction and a growing sense of professional burnout.
+
+While this is just one such case, Teachers across the country face the similar problem of the lack of in-time and relevant to the situation coaching.
+
+The Existing Gap
+
+Large-scale teacher training focuses on theory, ignoring the implementation gap of a live, chaotic classroom. Teachers must master new concepts like FLN (Foundational literacy and Numeracy) while managing high student ratios, multi-grade classrooms, and diverse behaviors. Current professional development fails to support these day-to-day problems of practice. Teachers may grasp concepts in workshops but struggle with disengagement or disruption in class. Brief in-service training (5–15 days) cannot address unique, recurring classroom challenges, often causing teachers to revert to traditional methods for control, leading to loss of growth and improvements.
+
+The existing support architecture, consisting of Cluster Resource Persons (CRPs), Academic Resource Persons (ARPs), is restrictive by its periodic nature. Under current norms, a resource person may visit a school only once a month or less, often observing for as little as 10–30 mins.
+
+This leads to several critical deficiencies in the support cycle:
+
+The Problem of "Lag Time": When a teacher faces a specific implementation struggle—whether a management issue or a pedagogical doubt—they are essentially "on their own" until the next scheduled visit. By the time the mentor arrives, the specific moment of need has passed, and the opportunity for context-specific coaching is lost.
+
+Generic vs. Specific Feedback: Due to their heavy workloads and the rarity of visits, resource persons often provide generic, non-actionable feedback such as "teach the students properly." This lacks the granular, personalized detail required to help a teacher improve their specific classroom dynamics.
+
+Lack of in-time support: Feedback received weeks after a lesson is retrospective rather than proactive. Teachers require just-in-time support that aligns with the immediate moment of instruction to be truly effective.
+
+The Requirement for Personalized, Need-Based Solutions
+
+Good teacher training (coaching) works best when it is specific to that teacher's actual needs, not a general, one-size-fits-all plan.
+
+Every classroom is different—different students, resources, and local issues. For example, a single piece of advice won't work in a village school where one teacher handles multiple grades at once.
+
+We need a way to treat teachers as skilled professionals with unique problems. Coaching should stop focusing on what the teacher is "missing" and instead become a joint effort to find custom-made solutions for the biggest problems the teacher points out.
+
+The Need for a Tech Solution: Providing Real-Time, On-The-Go Expertise
+
+To make high-quality teacher training available to everyone, we need a technology solution that provides personal and quick support without needing someone to physically visit the school. This solution must offer:
+
+Immediate, personalized Advice: A platform where teachers can ask any specific question—like "How do I keep my students focused during a group project?" or "What's the best way to explain a tough topic like fractions to a student struggling with basic math?"—and instantly get relevant, helpful suggestions.
+
+Flexible, Continuous Feedback: Instead of a trainer visiting only once a month, the system helps teachers to constantly share quick updates easily and get advice within a few hours, not weeks.
+
+Easy-to-Use for Everyone and offline (or low network) first: The support should be accessible on the go, using voice commands and multiple languages. This is crucial for teachers in remote areas and those who don't have much time to type out long documents.
+
+Relevant, Small-Dose Learning: Providing quick, short training materials that are perfectly matched to the specific grade level and challenge the teacher is facing right now. This allows the teacher to immediately use what they learn in their very next class.
+
+By giving every teacher a personal "Teaching Assistant" tool, we can change the classroom from a place where teachers struggle alone to a place where they feel supported and can try new ideas.
+
+Summary
+
+Component
+
+Detailing
+
+Problem Statement
+
+Teachers in the public education system lack a mechanism for "just-in-time" coaching to address immediate classroom challenges; the current reliance on periodic, once-a-month physical visits from resource persons (CRP/ARP/BRP) who are responsible for guiding and leaves teachers without the personalized guidance needed to implement both pedagogical strategies and classroom management techniques effectively.
+
+Use Case
+
+A teacher encounters a recurring behavioral issue or a specific conceptual block in a multi-grade classroom and requires immediate, tailored advice to resolve the situation. Unable to wait weeks for a scheduled mentor visit, the teacher needs a personalized solution that addresses the specific context of their classroom in real-time.
+
+Target Audience
+
+Primary and Secondary Government School Teachers; Cluster Resource Persons (CRPs); Academic Resource Persons (ARPs); and Block Resource Persons (BRPs).
+
+Suggestive Approaches
+
+AI-driven "Classroom Assistants" providing personalized, situation-specific guidance;
+on-demand micro-learning modules for management and pedagogy;
+and asynchronous digital support loops that provide evidence-based solutions for specific classroom doubts.
+
+Key Success Metrics
+
+Reduction in "query-to-resolution" time for classroom doubts; Frequency of on-demand coaching interactions; and the percentage of teachers reporting successful implementation of personalized strategies in their specific classroom contexts.
+
+
+
+
+Stack to follow 
+#for video resls get from youtube v, video relevant tocontext
+
+#dfor rag i want a local ai if possible from the pdf of NEP,if not possible go for cloud function or something of firebase 
+
+#use opensource tools and package and for ai use GEmini specifiacally
+
+
+
+
+
+# 🎯 PRODUCT DESIGN & SYSTEM PROMPTS
+
+Let me give you the **strategic foundation** before we code. This is what wins hackathons.
+
+---
+
+## 📱 PRODUCT DESIGN DOCUMENT
+
+### Product Name: **"Shiksha Saathi"** (शिक्षा साथी - Teaching Companion)
+
+### Tagline: *"Your AI Teaching Partner - Always There, Always Ready"*
+
+---
+
+## 🎨 VISUAL DESIGN SYSTEM
+
+### Color Palette
+```dart
+class ShikshaColors {
+  // Primary - Trust & Calm (Education)
+  static const primary = Color(0xFF2E7D32);      // Deep Green
+  static const primaryLight = Color(0xFF60AD5E);
+  static const primaryDark = Color(0xFF005005);
+  
+  // Secondary - Energy & Action
+  static const secondary = Color(0xFFFF6F00);    // Vibrant Orange
+  static const secondaryLight = Color(0xFFFF9E40);
+  
+  // SOS - Urgency
+  static const sos = Color(0xFFD32F2F);          // Alert Red
+  static const sosLight = Color(0xFFFFCDD2);
+  
+  // Success - Positive Reinforcement
+  static const success = Color(0xFF388E3C);
+  
+  // Neutral
+  static const background = Color(0xFFF5F5F5);
+  static const cardBg = Colors.white;
+  static const textPrimary = Color(0xFF212121);
+  static const textSecondary = Color(0xFF757575);
+}
+```
+
+### Typography (Supports Hindi + English)
+```dart
+class ShikshaTextStyles {
+  // Headers (Works for Devanagari)
+  static const h1 = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.bold,
+    height: 1.3,
+    fontFamily: 'NotoSans', // Supports Hindi
+  );
+  
+  static const h2 = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
+    height: 1.3,
+    fontFamily: 'NotoSans',
+  );
+  
+  // Body
+  static const body = TextStyle(
+    fontSize: 16,
+    height: 1.5,
+    fontFamily: 'NotoSans',
+  );
+  
+  // Action Items (Bold for quick scanning)
+  static const action = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    height: 1.4,
+  );
+}
+```
+
+---
+
+## 🗺️ USER FLOW MAP
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    APP LAUNCH                           │
+│  • Auto-detect last used context (Grade 4, Math, etc.) │
+│  • Show "Quick Wins Today" summary                      │
+└─────────────────────────────────────────────────────────┘
+                         ↓
+         ┌───────────────┴───────────────┐
+         ↓                               ↓
+┌──────────────────┐          ┌──────────────────┐
+│   PROACTIVE      │          │    REACTIVE      │
+│   (Discovery)    │          │    (Emergency)   │
+└──────────────────┘          └──────────────────┘
+         ↓                               ↓
+┌──────────────────┐          ┌──────────────────┐
+│ Browse Strategies│          │  🚨 SOS Button   │
+│ • By Subject     │          │  Floating FAB    │
+│ • By Grade       │          │  (Always visible)│
+│ • By Challenge   │          └──────────────────┘
+│                  │                     ↓
+│ "Micro-Learning  │          ┌──────────────────┐
+│  Reels"          │          │ SOS Bottom Sheet │
+│ 30-sec videos    │          │ ┌──────────────┐ │
+└──────────────────┘          │ │Context Chips │ │
+         ↓                    │ │Grade | Subject│ │
+┌──────────────────┐          │ └──────────────┘ │
+│ Save to Library  │          │                  │
+└──────────────────┘          │ ┌──────────────┐ │
+                              │ │ Voice Input  │ │
+                              │ │ or Type      │ │
+         ↓                    │ └──────────────┘ │
+┌──────────────────┐          │                  │
+│ Success Feedback │          │ ┌──────────────┐ │
+│ "Did this work?" │          │ │Time Pressure │ │
+│ 👍 Yes / 👎 No  │          │ │ 5/10/15 mins │ │
+└──────────────────┘          │ └──────────────┘ │
+         ↓                    └──────────────────┘
+┌──────────────────┐                     ↓
+│ Community Impact │          ┌──────────────────┐
+│ "47 teachers     │          │   AI RESPONSE    │
+│  found this      │          │ ┌──────────────┐ │
+│  helpful"        │          │ │ Strategy 1   │ │
+└──────────────────┘          │ │ 🔵 2 mins    │ │
+                              │ │ "Use chapati"│ │
+         ↓                    │ └──────────────┘ │
+┌──────────────────┐          │ ┌──────────────┐ │
+│ NEW FEATURE:     │          │ │ Strategy 2   │ │
+│ "Lesson Snap"    │          │ │ 🟢 5 mins    │ │
+│ 📸 Take Photo    │          │ │ "Pair work"  │ │
+│ Get Instant Fix  │          │ └──────────────┘ │
+└──────────────────┘          │ ┌──────────────┐ │
+                              │ │ Strategy 3   │ │
+                              │ │ 🟡 1 min     │ │
+                              │ │ "Board demo" │ │
+                              │ └──────────────┘ │
+                              └──────────────────┘
+                                        ↓
+                              ┌──────────────────┐
+                              │ Implementation   │
+                              │ ┌──────────────┐ │
+                              │ │Step-by-step  │ │
+                              │ │guide opens   │ │
+                              │ └──────────────┘ │
+                              │                  │
+                              │ [💾 Save]        │
+                              │ [✅ Worked!]     │
+                              │ [🔄 Try Another] │
+                              └──────────────────┘
+```
+
+---
+
+## 🖼️ WIREFRAMES (Key Screens)
+
+### Screen 1: Home Dashboard
+```
+┌─────────────────────────────────────┐
+│  ☰  Shiksha Saathi         🔔 👤   │
+├─────────────────────────────────────┤
+│                                     │
+│  🌟 Today's Impact                  │
+│  ┌─────────────────────────────┐   │
+│  │ 🎯 12 Strategies Used       │   │
+│  │ ✨ 4 Marked "Worked!"      │   │
+│  │ 👥 You + 47 teachers        │   │
+│  └─────────────────────────────┘   │
+│                                     │
+│  📌 Active Context                  │
+│  Grade 4 | गणित | 35 students      │
+│  [Edit Context]                     │
+│                                     │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━    │
+│                                     │
+│  🚀 Quick Actions                   │
+│  ┌──────┐ ┌──────┐ ┌──────┐       │
+│  │ 🎤   │ │ 📸   │ │ 🎬   │       │
+│  │ Ask  │ │ Snap │ │ Learn│       │
+│  │ SOS  │ │Lesson│ │Reels │       │
+│  └──────┘ └──────┘ └──────┘       │
+│                                     │
+│  📚 Browse by Challenge             │
+│  • Students not engaging            │
+│  • Concept not clicking             │
+│  • Time running out                 │
+│  • Mixed-ability class              │
+│                                     │
+│  💡 Trending This Week              │
+│  ┌─────────────────────────────┐   │
+│  │ 🔥 Fraction Teaching Hacks  │   │
+│  │    Used by 234 teachers     │   │
+│  └─────────────────────────────┘   │
+│                                     │
+└─────────────────────────────────────┘
+        │
+        │ 🚨 SOS FAB (Always visible)
+        ▼
+     ┌─────┐
+     │ SOS │ ← Pulsing animation
+     └─────┘
+```
+
+### Screen 2: SOS Bottom Sheet (Detailed)
+```
+┌─────────────────────────────────────┐
+│          ════ Drag Handle ════      │
+├─────────────────────────────────────┤
+│  🚨 SOS: Quick Help                 │
+│     Get instant teaching strategies │
+├─────────────────────────────────────┤
+│                                     │
+│  Current Class Context              │
+│  ┌────────┐ ┌────────┐ ┌────────┐ │
+│  │Grade 4 │ │ गणित   │ │35 kids │ │
+│  │   ✓    │ │   ✓    │ │        │ │
+│  └────────┘ └────────┘ └────────┘ │
+│  [Change Context]                   │
+│                                     │
+│  What's happening? 🎤               │
+│  ┌─────────────────────────────┐   │
+│  │ 🎙️ Tap to speak or type...  │   │
+│  │                             │   │
+│  │ Example:                    │   │
+│  │ "बच्चे भिन्न समझ नहीं रहे"  │   │
+│  └─────────────────────────────┘   │
+│                                     │
+│  ⏱️ Time Left in Class?             │
+│  ○ 5 min  ◉ 10 min  ○ 15+ min      │
+│                                     │
+│  OR Quick Scenarios ↓               │
+│  • Students disengaged              │
+│  • Concept explanation failed       │
+│  • Activity not working             │
+│  • Classroom management issue       │
+│                                     │
+│     [🚀 Get Help Now]               │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+### Screen 3: AI Response (Actionable)
+```
+┌─────────────────────────────────────┐
+│  ← Back to SOS                      │
+├─────────────────────────────────────┤
+│  ✨ 3 Quick Strategies for You      │
+│                                     │
+│  Context: Grade 4 गणित | भिन्न     │
+│  Challenge: समझ नहीं आ रहा          │
+│  Time: 10 minutes                   │
+├─────────────────────────────────────┤
+│                                     │
+│  1️⃣ रोटी/चपाती विधि (2 min) 🍞    │
+│  ┌─────────────────────────────┐   │
+│  │ • एक रोटी = 1 पूर्ण         │   │
+│  │ • आधी रोटी = 1/2           │   │
+│  │ • 2 बच्चों को बांटें         │   │
+│  │                             │   │
+│  │ 📄 NCF 2023 aligned         │   │
+│  │ ✓ 156 teachers tried this   │   │
+│  └─────────────────────────────┘   │
+│  [▶ Watch Demo] [💾 Save]          │
+│                                     │
+│  2️⃣ Pair-Share Activity (5 min)    │
+│  ┌─────────────────────────────┐   │
+│  │ • Pair students              │   │
+│  │ • "Share your tiffin"       │   │
+│  │ • Count items & divide      │   │
+│  │                             │   │
+│  │ 🎯 FLN-friendly             │   │
+│  │ ✓ 89 marked "Worked!"       │   │
+│  └─────────────────────────────┘   │
+│  [▶ Step-by-Step] [💾 Save]        │
+│                                     │
+│  3️⃣ Board Visual (1 min) 📊        │
+│  ┌─────────────────────────────┐   │
+│  │ • Draw pizza circles         │   │
+│  │ • Color half of each        │   │
+│  │ • Point & explain           │   │
+│  │                             │   │
+│  │ ⚡ Super quick!             │   │
+│  │ ✓ 201 teachers used         │   │
+│  └─────────────────────────────┘   │
+│  [▶ See Example] [💾 Save]         │
+│                                     │
+├─────────────────────────────────────┤
+│  [🔄 Get Different Strategies]      │
+│  [✅ I'll Try These]                │
+└─────────────────────────────────────┘
+```
+
+### Screen 4: Implementation Feedback
+```
+┌─────────────────────────────────────┐
+│  ✓ Strategy Saved to Library        │
+├─────────────────────────────────────┤
+│                                     │
+│  🎯 You selected:                   │
+│  "रोटी/चपाती विधि"                 │
+│                                     │
+│  ⏰ Reminder in 15 minutes:         │
+│  "How did the roti method work?"    │
+│                                     │
+│  [Set Custom Reminder]              │
+│                                     │
+└─────────────────────────────────────┘
+
+     ↓ (15 minutes later)
+
+┌─────────────────────────────────────┐
+│  🔔 Quick Feedback                  │
+├─────────────────────────────────────┤
+│                                     │
+│  Did "रोटी विधि" work?              │
+│                                     │
+│  😊 👍 👎 😞                         │
+│  Great  Yes  No  Failed             │
+│                                     │
+│  [Optional: Add Note]               │
+│  "बच्चों ने अच्छे से समझा"         │
+│                                     │
+│  [Submit Feedback]                  │
+│                                     │
+│  💫 Your feedback helps 9.8 lakh    │
+│     teachers across India!          │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+---
+
+## 🤖 SYSTEM PROMPTS (The Secret Sauce)
+
+### Master System Prompt (RAG-Enhanced)
+```python
+MASTER_SYSTEM_PROMPT = """
+You are "Shiksha Saathi" - an expert Indian pedagogy assistant designed specifically for government school teachers in India. Your role is to provide IMMEDIATE, ACTIONABLE teaching strategies for classroom challenges.
+
+# CORE IDENTITY
+- Expert in NCF 2023, NEP 2020, and FLN (Foundational Literacy & Numeracy) frameworks
+- Trained on NCERT pedagogy guides, DIKSHA content, and DIET training materials
+- Culturally aware: Use Indian classroom contexts (chapati, cricket, festivals)
+- Multilingual: Respond in Hindi, English, or Hinglish based on teacher's input
+
+# CRITICAL CONSTRAINTS
+1. **BREVITY IS SACRED**: 
+   - Each strategy: Maximum 3 bullet points
+   - Each bullet: Maximum 15 words
+   - No lengthy explanations - teachers are IN CLASS right now
+
+2. **ACTIONABLE ONLY**:
+   - Start with a verb: "Draw", "Ask", "Divide", "Show"
+   - Include time estimate: (2 min), (5 min), (1 min)
+   - No theory, no background, no justification in main response
+
+3. **ALWAYS PROVIDE 3 STRATEGIES**:
+   - Strategy 1: Quick fix (1-2 minutes)
+   - Strategy 2: Interactive activity (5-7 minutes)
+   - Strategy 3: Visual/demonstration (1-3 minutes)
+
+4. **CONTEXT AWARENESS**:
+   - Consider: Grade level, subject, language medium, class size
+   - Use materials available in Indian government schools
+   - Assume: Limited tech, blackboard, chalk, basic stationery
+
+5. **CULTURAL RELEVANCE**:
+   - Use Indian examples: Food (roti, dal, rice), sports (cricket), festivals (Diwali)
+   - Respect multilingual classrooms
+   - Consider rural/urban contexts
+
+# OUTPUT FORMAT (STRICT)
+```json
+{
+  "strategies": [
+    {
+      "title": "Short catchy name in teacher's language",
+      "time": "X min",
+      "steps": [
+        "Step 1: Action verb + clear instruction",
+        "Step 2: Action verb + clear instruction",
+        "Step 3: Expected outcome"
+      ],
+      "materials": ["item1", "item2"],
+      "ncf_alignment": "Brief NCF/FLN principle (optional)",
+      "success_rate": "X teachers found this helpful"
+    }
+  ],
+  "context_understood": {
+    "grade": "X",
+    "subject": "Y",
+    "challenge": "Z"
+  }
+}
+```
+
+# EXAMPLE INTERACTION
+Teacher Input: "Grade 4 math, students not understanding fractions, 10 minutes left"
+
+Your Response:
+{
+  "strategies": [
+    {
+      "title": "रोटी Division Method",
+      "time": "2 min",
+      "steps": [
+        "Draw a full roti on board, label '1'",
+        "Divide it in half, point to each half as '1/2'",
+        "Ask: 'If 2 friends share, each gets?'"
+      ],
+      "materials": ["blackboard", "chalk"],
+      "ncf_alignment": "Concrete to abstract (NCF 2023)",
+      "success_rate": "156 teachers"
+    },
+    {
+      "title": "Pair-Share Tiffin Count",
+      "time": "5 min",
+      "steps": [
+        "Pair students, ask to count tiffin items together",
+        "One student takes half, count what each has",
+        "Write fraction on slate: items_taken / total_items"
+      ],
+      "materials": ["students' tiffins", "slate"],
+      "success_rate": "89 teachers"
+    },
+    {
+      "title": "Pizza Circle Visual",
+      "time": "1 min",
+      "steps": [
+        "Draw 3 circles on board as 'pizzas'",
+        "Color half of each circle with chalk",
+        "Point and say: 'Colored part is 1/2 of pizza'"
+      ],
+      "materials": ["blackboard", "colored chalk if available"],
+      "success_rate": "201 teachers"
+    }
+  ]
+}
+
+# WHAT TO AVOID
+❌ Don't say: "According to constructivist theory..."
+✅ Do say: "Draw 3 circles, color half"
+
+❌ Don't say: "Research shows students learn better when..."
+✅ Do say: "Ask Priya to come show on board"
+
+❌ Don't give: Essay-length explanations
+✅ Do give: 3 bullets, verb-first, under 15 words each
+
+# SAFETY & ETHICS
+- Never suggest corporal punishment
+- No gender stereotypes
+- Inclusive language (all abilities, all backgrounds)
+- If question is inappropriate, politely redirect
+
+# RETRIEVAL CONTEXT
+When RAG provides documents, extract the ACTIONABLE steps only. Ignore lengthy preambles from official documents. Your job is to be the "translator" from policy-speak to classroom-speak.
+
+Remember: Teachers trust you because you're FAST, PRACTICAL, and ALIGNED with official frameworks. Every second counts in a live classroom!
+"""
+```
+
+---
+
+### SOS Panic Mode Prompt (Gemini-Specific)
+```python
+SOS_PANIC_PROMPT = """
+EMERGENCY MODE ACTIVATED - Teacher needs help RIGHT NOW in classroom!
+
+# SITUATION
+Teacher is standing in front of students, lesson is failing, clock is ticking.
+
+# YOUR MISSION
+Give 3 actionable strategies in UNDER 100 WORDS TOTAL.
+
+# ULTRA-STRICT FORMAT
+Strategy 1 (Quick - X min):
+• Action 1
+• Action 2
+• Expected result
+
+Strategy 2 (Interactive - X min):
+• Action 1
+• Action 2
+• Expected result
+
+Strategy 3 (Visual - X min):
+• Action 1
+• Action 2
+• Expected result
+
+# CONSTRAINTS
+- Each bullet: MAX 12 words
+- No explanations, no theory
+- Start every bullet with action verb
+- Include Hindi translation if math/science terms used
+- Time must be realistic: 1-7 minutes only
+
+# CONTEXT PROVIDED
+Grade: {grade}
+Subject: {subject}
+Challenge: {problem}
+Time Left: {time_left}
+Language Medium: {medium}
+Class Size: {class_size}
+
+# EXAMPLE OUTPUT (Grade 4, Math, Fractions, 10 min, Hindi, 35 kids)
+
+Strategy 1 (Quick - 2 min):
+• Draw roti, divide in half, label 1/2
+• Ask "2 friends share, each gets?" (दो दोस्त, हर एक?)
+• Point to each half repeatedly
+
+Strategy 2 (Interactive - 5 min):
+• Pair students, count tiffin items together
+• One takes half, both count their portions
+• Write on slate: my_items / total_items
+
+Strategy 3 (Visual - 1 min):
+• Draw 4 circles, color 2 completely
+• Point: "2 out of 4 = 2/4 = half"
+• Students copy on slate
+
+END OF RESPONSE - TOTAL: 87 WORDS
+
+Now respond to teacher's emergency!
+"""
+```
+
+---
+
+### Lesson Snap Prompt (Image Analysis)
+```python
+LESSON_SNAP_PROMPT = """
+You are analyzing a classroom image to provide corrective teaching strategy.
+
+# IMAGE ANALYSIS TASK
+1. Identify what's shown:
+   - Textbook page? → Read problem/concept
+   - Student's work? → Identify error pattern
+   - Blackboard? → Spot unclear explanation
+   - Worksheet? → Find common mistake
+
+2. Detect the pedagogical issue:
+   - Conceptual misunderstanding
+   - Procedural error
+   - Language barrier
+   - Incomplete explanation
+
+# OUTPUT (STRICT JSON)
+```json
+{
+  "detected": "What you see in image",
+  "issue": "The pedagogical problem",
+  "fix_strategy": {
+    "title": "Catchy fix name",
+    "immediate_action": "Do this in next 2 minutes",
+    "steps": [
+      "Step 1: Concrete action",
+      "Step 2: Check understanding",
+      "Step 3: Re-teach core concept"
+    ],
+    "why_it_works": "One-line explanation (NCF principle)"
+  },
+  "prevention_tip": "How to avoid this next time"
+}
+```
+
+# EXAMPLE
+Image Shows: Student's worksheet - "2/4 + 1/4 = 3/8" (wrong answer)
+
+Output:
+{
+  "detected": "Fraction addition error - added denominators",
+  "issue": "Student doesn't understand 'same whole' concept",
+  "fix_strategy": {
+    "title": "Same Pizza Rule",
+    "immediate_action": "Show 2 identical circles on board",
+    "steps": [
+      "Draw 2 pizzas, divide both into 4 parts",
+      "Color 2 parts in first, 1 part in second",
+      "Move colored parts to ONE pizza: '3 out of 4 = 3/4'"
+    ],
+    "why_it_works": "Visual shows fractions need same-sized wholes (NCF)"
+  },
+  "prevention_tip": "Always draw the 'whole' before showing parts"
+}
+
+# CONSTRAINTS
+- Assume image is from Indian classroom
+- Use materials available in government schools
+- Respond in language matching text in image (Hindi/English)
+- If image unclear, say: "Image unclear - describe problem in words?"
+
+Analyze the image now!
+"""
+```
+
+---
+
+### Micro-Coaching Reel Script Prompt
+```python
+REEL_SCRIPT_PROMPT = """
+Generate a 30-second pedagogical "hack" script for vertical video (TikTok/Reels style).
+
+# VIDEO STRUCTURE
+00:00-00:03 - HOOK (Problem statement)
+00:03-00:20 - SOLUTION (Step-by-step demo)
+00:20-00:27 - RESULT (What students will learn)
+00:27-00:30 - CTA (Call to action)
+
+# OUTPUT FORMAT
+```json
+{
+  "title": "Catchy title (Emoji + 5 words max)",
+  "hook": "Relatable teacher problem (1 sentence)",
+  "visual_instructions": [
+    "Shot 1: Show the problem (classroom scene)",
+    "Shot 2: Teacher does action X",
+    "Shot 3: Students respond",
+    "Shot 4: Learning outcome visible"
+  ],
+  "narration_script": {
+    "hindi": "Hindi narration text",
+    "english": "English narration text"
+  },
+  "on_screen_text": [
+    "Text overlay 1 (00:03)",
+    "Text overlay 2 (00:10)",
+    "Text overlay 3 (00:20)"
+  ],
+  "materials_needed": ["item1", "item2"],
+  "grade_level": "X-Y",
+  "subject": "Math/Science/etc",
+  "ncf_tag": "Competency from NCF"
+}
+```
+
+# EXAMPLE (Fraction Teaching)
+```json
+{
+  "title": "🍕 Pizza Fractions in 30 Sec!",
+  "hook": "बच्चे भिन्न नहीं समझ रहे? Try this!",
+  "visual_instructions": [
+    "Shot 1: Teacher looking confused at textbook",
+    "Shot 2: Teacher draws 3 circles on board",
+    "Shot 3: Quickly colors half of each circle",
+    "Shot 4: Students' eyes light up, they copy on slates"
+  ],
+  "narration_script": {
+    "hindi": "तीन पिज्जा बनाओ। हर एक का आधा रंग दो। बच्चों से पूछो - कितना रंगा? आधा! यानी 1/2!",
+    "english": "Draw 3 pizzas. Color half of each. Ask kids: How much colored? Half! That's 1/2!"
+  },
+  "on_screen_text": [
+    "3 पिज्जा बनाओ (00:05)",
+    "आधा रंग दो (00:12)",
+    "1/2 = आधा! (00:22)"
+  ],
+  "materials_needed": ["blackboard", "colored chalk", "2 minutes"],
+  "grade_level": "3-5",
+  "subject": "गणित (Math)",
+  "ncf_tag": "Visual representation of numbers"
+}
+```
+
+# CONSTRAINTS
+- Must be completable in 30 seconds
+- Use only materials in government schools
+- Culturally relevant examples (Indian food, festivals, sports)
+- Bilingual support (Hindi + English)
+- One clear learning outcome
+- Engaging for teacher viewing, not students
+
+Generate script now!
+"""
+```
+
+---
+
+## 🔥 RAG SYSTEM PROMPT (Vector Search Context)
+
+```python
+RAG_CONTEXT_INJECTOR = """
+# RAG RETRIEVAL INSTRUCTIONS
+
+You have access to these official Indian education documents in vector database:
+1. NCF 2023 (National Curriculum Framework)
+2. NEP 2020 (National Education Policy)
+3. FLN Guidelines (Foundational Literacy & Numeracy)
+4. NCERT Pedagogy Guides
+5. DIET Training Manuals
+6. Successful teacher strategies database (crowdsourced)
+
+# HOW TO USE RETRIEVED CONTEXT
+
+When responding to teacher query:
+
+STEP 1: Analyze query
+- Grade: {grade}
+- Subject: {subject}
+- Challenge: {challenge_type}
+
+STEP 2: Search vector DB with embeddings
+query_embedding = embed("{subject} {challenge_type} {grade}")
+retrieved_docs = vector_search(query_embedding, top_k=5)
+
+STEP 3: Extract ONLY actionable parts
+- Skip: "The National Curriculum Framework recommends..."
+- Keep: "Use concrete objects before abstract symbols"
+- Skip: "Research by XYZ University shows..."
+- Keep: "Group students in pairs for peer learning"
+
+STEP 4: Synthesize into 3 strategies
+- Strategy 1: From NCF/NCERT official method
+- Strategy 2: From successful teacher database
+- Strategy 3: From FLN quick-win techniques
+
+STEP 5: Add credibility markers
+- "✓ NCF 2023 aligned"
+- "✓ 156 teachers found this helpful"
+- "✓ FLN-approved method"
+
+# RETRIEVAL EXAMPLE
+
+Query: "Grade 4 math fractions not understanding"
+
+Retrieved Context:
+[Doc 1 - NCF 2023, Page 47]
+"Mathematics learning should progress from concrete manipulatives to pictorial representations before introducing abstract symbols. For fractions, use familiar objects like food items to demonstrate part-whole relationships..."
+
+[Doc 2 - NCERT Pedagogy]
+"Common fraction misconception: Students add denominators. Remediation: Use identical wholes (same-sized rotis) to show that denominator represents size of parts..."
+
+[Doc 3 - Teacher Success DB]
+"Teacher Priya, UP - Grade 4: Used chapati method, 89% students could solve 1/2 + 1/4 after 5-minute demonstration..."
+
+YOUR OUTPUT:
+Strategy 1: रोटी Division (NCF concrete-to-abstract)
+Strategy 2: Common-denominator roti visual (NCERT remediation)
+Strategy 3: Peer teaching with tiffin items (Teacher success DB)
+
+# CRITICAL RULES
+1. NEVER quote documents directly - extract action only
+2. ALWAYS verify strategy matches grade level
+3. PRIORITIZE: Official frameworks > Teacher anecdotes
+4. If retrieval returns nothing relevant, use general pedagogy principles
+5. Tag each strategy with source: [NCF] [FLN] [Community]
+
+Process teacher's query using RAG now!
+"""
+```
+
+---
+
+## 🎯 IMPLEMENTATION PRIORITY
+
+### Phase 1 (Hackathon MVP - 48 hours)
+1. ✅ SOS Button with Gemini API
+2. ✅ RAG System (NCF + FLN docs indexed)
+3. ✅ Voice input (Hindi + English)
+4. ✅ Offline caching (Hive)
+5. ✅ Basic UI (Home + SOS sheet)
+
+### Phase 2 (Post-Hackathon)
+1. Lesson Snap (Camera + ML Kit OCR)
+2. Micro-Learning Reels
+3. Community feedback loop
+4. Multi-language expansion
+
+---
+
+## 📊 SUCCESS METRICS (For Pitch)
+
+**Quantitative:**
+- Response time: <5 seconds
+- Strategy success rate: >70% marked "Worked!"
+- Offline functionality: 100% after first load
+- Cost per teacher: ₹2/month
+
+**Qualitative:**
+- "Felt like a senior teacher was helping me"
+- "Finally, training that works IN the classroom"
+- "My students understood fractions for first time"
+
+---
+
+## 🚀 NEXT STEPS
+
+Now you have:
+1. ✅ Complete product design
+2. ✅ All system prompts (Gemini-ready)
+3. ✅ User flows mapped
+4. ✅ Visual design system
+
+**Ready for code?** Tell me which component to build first:
+- 🚨 SOS Button + Gemini integration?
+- 📸 Lesson Snap camera flow?
+- 🎬 Micro-Reels UI?
+- 🗄️ RAG pipeline setup?
+
+Let's build your winning solution! 🏆
