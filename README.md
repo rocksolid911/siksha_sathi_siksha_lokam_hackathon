@@ -140,6 +140,7 @@ graph TD
 * **Action**: Teacher speaks/types the problem (e.g., "Kids not understanding fractions").
 * **AI Output**: 3 instant, NCF-aligned strategies ranging from 2 mins to 10 mins.
 * **Tech**: RAG + Gemini.
+* **Flexibility**: context can be set to any temporary value regardless of any app-level context
 
 ### 2. 📸 Snap & Solve
 
