@@ -4,8 +4,6 @@
 
 Shiksha Saathi (Education Companion) is an intelligent, offline-first mobile application designed to empower government school teachers in India. It addresses the critical gap between **teacher training** and **classroom implementation** by providing real-time, context-aware pedagogical support.
 
-![Banner Placeholder](assets/images/banner_placeholder.png)
-*(Add a banner image here)*
 
 ---
 
@@ -216,10 +214,10 @@ Base URL: `/api/v1/`
 
 ## 📸 Screenshots
 
-| Home & Context | SOS Panic Mode | AI Strategies | Snap & Solve |
-|:---:|:---:|:---:|:---:|
-| ![Home](assets/screenshots/home.png) | ![SOS](assets/screenshots/sos.png) | ![Strategies](assets/screenshots/strategies.png) | ![Snap](assets/screenshots/snap.png) |
-*(Please add screenshots to `flutter_app/assets/screenshots/`)*
+| Home & Context | SOS Panic Mode | AI Strategies | Snap & Solve | Notification | Library & Snap | Context Selection | User Profile
+|:---:|:---:|:---:|:---:| :---:|:---:|:---:|:---:|
+| ![Home](assets/screenshots/home.jpeg) | ![SOS](assets/screenshots/sos.jpeg) | ![Strategies](assets/screenshots/strategies.jpeg) | ![Snap](assets/screenshots/snap.jpeg) | ![Notification](assets/screenshots/Notification.jpeg) | ![Snap History](assets/screenshots/Library_Camera_solution.jpeg)  | ![Context](assets/screenshots/Context_selection.jpeg) | ![Profile](assets/screenshots/Profile.jpeg) 
+
 
 ---
 
@@ -238,8 +236,8 @@ Base URL: `/api/v1/`
 cd backend
 
 # 2. Create & Activate Conda Environment
-conda create -n prajatantra python=3.10
-conda activate prajatantra
+conda create -n siksha python=3.10
+conda activate siksha
 
 # 3. Install Dependencies
 pip install -r requirements.txt
