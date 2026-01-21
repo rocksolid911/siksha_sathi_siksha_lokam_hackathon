@@ -236,8 +236,8 @@ Base URL: `/api/v1/`
 cd backend
 
 # 2. Create & Activate Conda Environment
-conda create -n prajatantra python=3.10
-conda activate prajatantra
+conda create -n siksha python=3.10
+conda activate siksha
 
 # 3. Install Dependencies
 pip install -r requirements.txt
