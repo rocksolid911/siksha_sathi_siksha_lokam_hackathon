@@ -214,9 +214,9 @@ Base URL: `/api/v1/`
 
 ## 📸 Screenshots
 
-| Home & Context | SOS Panic Mode | AI Strategies | Snap & Solve |
-|:---:|:---:|:---:|:---:|
-| ![Home](assets/screenshots/home.jpeg) | ![SOS](assets/screenshots/sos.jpeg) | ![Strategies](assets/screenshots/strategies.jpeg) | ![Snap](assets/screenshots/snap.jpeg) |
+| Home & Context | SOS Panic Mode | AI Strategies | Snap & Solve | Notification | Library & Snap | Context Selection | User Profile
+|:---:|:---:|:---:|:---:| :---:|:---:|:---:|:---:|
+| ![Home](assets/screenshots/home.jpeg) | ![SOS](assets/screenshots/sos.jpeg) | ![Strategies](assets/screenshots/strategies.jpeg) | ![Snap](assets/screenshots/snap.jpeg) | ![Notification](assets/screenshots/Notification.jpeg) | ![Snap History](assets/screenshots/Library_Camera_solution.jpeg)  | ![Context](assets/screenshots/Context_selection.jpeg) | ![Profile](assets/screenshots/Profile.jpeg) 
 
 
 ---
