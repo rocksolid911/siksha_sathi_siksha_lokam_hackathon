@@ -218,7 +218,7 @@ Base URL: `/api/v1/`
 
 | Home & Context | SOS Panic Mode | AI Strategies | Snap & Solve |
 |:---:|:---:|:---:|:---:|
-| ![Home](assets/screenshots/home.jpg) | ![SOS](assets/screenshots/sos.jpg) | ![Strategies](assets/screenshots/strategies.jpg) | ![Snap](assets/screenshots/snap.jpg) |
+| ![Home](assets/screenshots/home.jpeg) | ![SOS](assets/screenshots/sos.jpeg) | ![Strategies](assets/screenshots/strategies.jpeg) | ![Snap](assets/screenshots/snap.jpeg) |
 *(Please add screenshots to `flutter_app/assets/screenshots/`)*
 
 ---
