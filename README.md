@@ -317,7 +317,7 @@ python -c "from rag.indexer import index_ncf_pdf; index_ncf_pdf()"
 
 *Wait for the "Indexing Complete" message.*
 
-### 3. Mobile App Setup
+### 4. Mobile App Setup
 
 ```bash
 # 1. Navigate to app
