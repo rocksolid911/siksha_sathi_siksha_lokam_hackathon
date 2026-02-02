@@ -3,6 +3,8 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:shiksha_saathi/core/constants/app_colors.dart';
 import 'package:shiksha_saathi/core/constants/app_text_styles.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:shiksha_saathi/l10n/app_localizations.dart';
+import '../../../../features/search/presentation/screens/pdf_viewer_screen.dart';
 import '../../../../features/search/presentation/screens/video_player_screen.dart';
 
 class SavedStrategyDetailScreen extends StatelessWidget {
@@ -87,8 +89,45 @@ class SavedStrategyDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Video Button (if available)
-            if (videoUrl != null && videoUrl.isNotEmpty) ...[
+            // PDF or Video Button
+            if (strategy['type'] == 'pdf' ||
+                (videoUrl != null &&
+                    videoUrl.toLowerCase().endsWith('.pdf'))) ...[
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColors.primary.withOpacity(0.1)),
+                ),
+                child: Column(
+                  children: [
+                    const Icon(LucideIcons.fileText,
+                        size: 48, color: AppColors.primary),
+                    const SizedBox(height: 12),
+                    const Text('Saved PDF Resource',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 12),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PdfViewerScreen(
+                              url: videoUrl ?? '',
+                              title: title,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(AppLocalizations.of(context)!.pdfViewer),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+            ] else if (videoUrl != null && videoUrl.isNotEmpty) ...[
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),

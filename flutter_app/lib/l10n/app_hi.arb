@@ -67,6 +67,9 @@
   "pdfViewer": "पीडीएफ व्यूअर",
   "tapToOpen": "खोलने के लिए टैप करें",
   "couldNotOpenPdf": "पीडीएफ लिंक नहीं खोल सका",
+  "resourceSaved": "संसाधन लाइब्रेरी में सहेजा गया",
+  "failedToSave": "संसाधन सहेजने में विफल",
+  "saveToLibrary": "लाइब्रेरी में सहेजें",
 
   "searchTitle": "खोजें",
   "searchHint": "\"गणित\" या \"अनुशासन\" खोजें",

@@ -210,6 +210,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get couldNotOpenPdf => 'पीडीएफ लिंक नहीं खोल सका';
 
   @override
+  String get resourceSaved => 'संसाधन लाइब्रेरी में सहेजा गया';
+
+  @override
+  String get failedToSave => 'संसाधन सहेजने में विफल';
+
+  @override
+  String get saveToLibrary => 'लाइब्रेरी में सहेजें';
+
+  @override
   String get searchTitle => 'खोजें';
 
   @override

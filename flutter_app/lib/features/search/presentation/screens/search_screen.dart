@@ -11,8 +11,9 @@ import 'package:shiksha_saathi/features/search/presentation/widgets/video_result
 import 'package:shiksha_saathi/features/search/presentation/screens/video_player_screen.dart';
 import 'package:shiksha_saathi/features/profile/bloc/profile_bloc.dart';
 import 'package:shiksha_saathi/features/profile/bloc/profile_state.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import 'package:shiksha_saathi/l10n/app_localizations.dart';
+import 'package:shiksha_saathi/features/search/presentation/screens/pdf_viewer_screen.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -271,19 +272,16 @@ class _SearchViewState extends State<SearchView> {
         side: BorderSide(color: AppColors.neutral200),
       ),
       child: InkWell(
-        onTap: () async {
-          final url = Uri.parse(result['link']);
-          if (await canLaunchUrl(url)) {
-            await launchUrl(url, mode: LaunchMode.externalApplication);
-          } else {
-            if (context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                    content:
-                        Text(AppLocalizations.of(context)!.couldNotOpenPdf)),
-              );
-            }
-          }
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PdfViewerScreen(
+                url: result['link'],
+                title: result['title'],
+              ),
+            ),
+          );
         },
         borderRadius: BorderRadius.circular(12),
         child: Padding(

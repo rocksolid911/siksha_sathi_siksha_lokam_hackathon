@@ -67,6 +67,9 @@
   "pdfViewer": "PDF Viewer",
   "tapToOpen": "Tap to open",
   "couldNotOpenPdf": "Could not open PDF link",
+  "resourceSaved": "Resource saved to library",
+  "failedToSave": "Failed to save resource",
+  "saveToLibrary": "Save to Library",
 
   "searchTitle": "Search",
   "searchHint": "Search for \"Maths\" or \"Discipline\"",

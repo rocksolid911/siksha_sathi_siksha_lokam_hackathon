@@ -377,6 +377,14 @@ class _SOSBottomSheetState extends State<SOSBottomSheet> {
       ];
     }
 
+    // Ensure current temp values are in the list
+    if (_tempGrade.isNotEmpty && !availableGrades.contains(_tempGrade)) {
+      availableGrades.insert(0, _tempGrade);
+    }
+    if (_tempSubject.isNotEmpty && !availableSubjects.contains(_tempSubject)) {
+      availableSubjects.insert(0, _tempSubject);
+    }
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -402,12 +410,33 @@ class _SOSBottomSheetState extends State<SOSBottomSheet> {
                           ? grade
                           : 'Class $grade';
 
+                      final isSelected = _tempGrade == grade;
                       return ChoiceChip(
                         label: Text(label),
-                        selected: _tempGrade == grade,
+                        selected: isSelected,
                         onSelected: (selected) {
                           setDialogState(() => _tempGrade = grade);
                         },
+                        selectedColor: AppColors.primaryContainer,
+                        backgroundColor: AppColors.surfaceVariant,
+                        labelStyle: TextStyle(
+                          color: isSelected
+                              ? AppColors.primary
+                              : AppColors.textSecondary,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppConstants.radiusFull),
+                          side: BorderSide(
+                            color: isSelected
+                                ? AppColors.primary
+                                : Colors.transparent,
+                            width: 1,
+                          ),
+                        ),
+                        showCheckmark: false,
                       );
                     }).toList(),
                   ),
@@ -418,15 +447,36 @@ class _SOSBottomSheetState extends State<SOSBottomSheet> {
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
-                    children: availableSubjects
-                        .map((subject) => ChoiceChip(
-                              label: Text(subject),
-                              selected: _tempSubject == subject,
-                              onSelected: (selected) {
-                                setDialogState(() => _tempSubject = subject);
-                              },
-                            ))
-                        .toList(),
+                    children: availableSubjects.map((subject) {
+                      final isSelected = _tempSubject == subject;
+                      return ChoiceChip(
+                        label: Text(subject),
+                        selected: isSelected,
+                        onSelected: (selected) {
+                          setDialogState(() => _tempSubject = subject);
+                        },
+                        selectedColor: AppColors.primaryContainer,
+                        backgroundColor: AppColors.surfaceVariant,
+                        labelStyle: TextStyle(
+                          color: isSelected
+                              ? AppColors.primary
+                              : AppColors.textSecondary,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppConstants.radiusFull),
+                          side: BorderSide(
+                            color: isSelected
+                                ? AppColors.primary
+                                : Colors.transparent,
+                            width: 1,
+                          ),
+                        ),
+                        showCheckmark: false,
+                      );
+                    }).toList(),
                   ),
                   const SizedBox(height: 16),
                   const Text('Student Count',

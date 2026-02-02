@@ -18,9 +18,58 @@ from pypdf import PdfReader
 import chromadb
 from chromadb.config import Settings
 from django.conf import settings
-from duckduckgo_search import DDGS
+from html.parser import HTMLParser
 
 logger = logging.getLogger(__name__)
+
+
+
+class DDGHtmlParser(HTMLParser):
+    """Simple parser for DuckDuckGo HTML results"""
+    def __init__(self):
+        super().__init__()
+        self.in_result = False
+        self.in_title_link = False
+        self.current_link = None
+        self.current_title = None
+        self.results = []
+        
+    def handle_starttag(self, tag, attrs):
+        attrs_dict = dict(attrs)
+        classes = attrs_dict.get('class', '').split()
+        
+        if tag == 'div' and 'result__body' in classes:
+            self.in_result = True
+            
+        if self.in_result and tag == 'a' and 'result__a' in classes:
+            self.in_title_link = True
+            href = attrs_dict.get('href', '')
+            if "uddg=" in href:
+                try:
+                    import urllib.parse
+                    parsed = urllib.parse.urlparse(href)
+                    qs = urllib.parse.parse_qs(parsed.query)
+                    if 'uddg' in qs:
+                        self.current_link = qs['uddg'][0]
+                except:
+                    pass
+            elif href:
+                 self.current_link = href
+
+    def handle_endtag(self, tag):
+        if tag == 'a' and self.in_title_link:
+            self.in_title_link = False
+            if self.current_link:
+                self.results.append({
+                    'link': self.current_link,
+                    'title': (self.current_title or "PDF Resource").strip()
+                })
+                self.current_link = None
+                self.current_title = None
+
+    def handle_data(self, data):
+        if self.in_title_link:
+            self.current_title = (self.current_title or "") + data
 
 
 class RAGManager:
@@ -55,6 +104,20 @@ class RAGManager:
         if self.gemini_api_key and self.gemini_api_key != 'your-gemini-api-key-here':
             genai.configure(api_key=self.gemini_api_key)
             logger.info("Gemini API initialized in RAG Manager")
+        
+        # Load NCF Summary
+        try:
+            # ncf_summary.md is in the project root (parent of backend)
+            # manager.py is in backend/rag/
+            project_root = Path(__file__).resolve().parent.parent.parent
+            self.ncf_summary_path = project_root / "ncf_summary.md"
+            
+            with open(self.ncf_summary_path, 'r', encoding='utf-8') as f:
+                self.ncf_summary_content = f.read()
+            logger.info(f"Loaded NCF summary from {self.ncf_summary_path}")
+        except Exception as e:
+            logger.warning(f"Failed to load NCF summary from {self.ncf_summary_path}: {e}")
+            self.ncf_summary_content = ""
         
         # Ensure persist directory exists
         Path(self.persist_directory).mkdir(parents=True, exist_ok=True)
@@ -361,44 +424,65 @@ class RAGManager:
     
     def search_google_pdfs(self, query: str, limit: int = 5) -> List[Dict]:
         """
-        Search Web for PDFs related to the query using DuckDuckGo.
+        Search Web for PDFs related to the query using DuckDuckGo HTML parsing.
         """
         pdfs = []
-        search_query = f"{query} filetype:pdf"
-        logger.info(f"🔎 ENTERING search_web_pdfs (DDG) for: {search_query}")
+        queries_to_try = [
+            f"{query} filetype:pdf",
+            f"{query} pdf"
+        ]
         
-        try:
-            # simple usage of DDGS().text()
-            results = DDGS().text(search_query, max_results=limit)
+        for search_query in queries_to_try:
+            if len(pdfs) >= limit:
+                break
             
-            if results:
-                logger.info(f"   - DDG returned {len(results)} raw results")
-                for r in results:
-                    # r is a dict: {'title': ..., 'href': ..., 'body': ...}
-                    title = r.get('title', 'PDF Resource')
-                    link = r.get('href', '')
-                    snippet = r.get('body', 'PDF Document from Web')
+            logger.info(f"🔎 ENTERING search_web_pdfs (HTML Parser) for: {search_query}")
+            
+            try:
+                url = "https://html.duckduckgo.com/html/"
+                params = {'q': search_query}
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Accept-Language': 'en-US,en;q=0.5',
+                    'Referer': 'https://html.duckduckgo.com/'
+                }
+                
+                response = httpx.get(url, params=params, headers=headers, timeout=10, follow_redirects=True)
+                
+                if response.status_code == 200:
+                    html_content = response.text
+                    parser = DDGHtmlParser()
+                    parser.feed(html_content)
                     
-                    logger.info(f"   - Inspecting URL: {link}")
-                    if link.lower().endswith('.pdf') or 'pdf' in link.lower():
-                        pdfs.append({
-                            'title': title,
-                            'link': link,
-                            'snippet': snippet,
-                            'source': 'DuckDuckGo Search'
-                        })
-                    else:
-                        logger.info(f"   - Skipped (not PDF): {link}")
-            else:
-                 logger.warning("   - DDG returned NO results.")
-
-            logger.info(f"✅ Found {len(pdfs)} PDFs in manager")
-            
-        except Exception as e:
-            logger.error(f"❌ Web Search failed: {e}")
-            import traceback
-            logger.error(traceback.format_exc())
-            
+                    logger.info(f"   - Parsed {len(parser.results)} raw links")
+                    
+                    for res in parser.results:
+                        if len(pdfs) >= limit:
+                            break
+                        
+                        link = res['link']
+                        title = res['title']
+                        
+                        # More lenient check for PDFs
+                        is_pdf = link.lower().endswith('.pdf') or 'pdf' in link.lower() or 'pdf' in title.lower()
+                        
+                        if is_pdf:
+                            if not any(p['link'] == link for p in pdfs):
+                                pdfs.append({
+                                    'title': title,
+                                    'link': link,
+                                    'snippet': "PDF Document",
+                                    'source': 'DuckDuckGo Search'
+                                })
+                                logger.info(f"     ✅ Added PDF: {title}")
+                else:
+                    logger.warning(f"   - DDG returned status {response.status_code}")
+                    
+            except Exception as e:
+                logger.error(f"❌ Web Search failed for '{search_query}': {e}")
+        
+        logger.info(f"✅ Found {len(pdfs)} PDFs in manager")
         return pdfs
     
     def answer_question(
@@ -487,9 +571,14 @@ Question: {question}
 
 Additional Context: {context if context else 'None provided'}
 
+global NCF Context which you must follow:
+{self.ncf_summary_content}
+
 {ncf_context if ncf_context else 'No specific NCF context available.'}
 
 Respond with ONLY valid JSON containing 3 strategies."""
+
+        logger.info(f"FULL RAG PROMPT:\n{user_prompt}")
 
         # Step 2: Get AI response using Gemini
         video_data = []

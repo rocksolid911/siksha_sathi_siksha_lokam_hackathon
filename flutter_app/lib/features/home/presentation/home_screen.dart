@@ -59,8 +59,25 @@ class _HomeScreenState extends State<HomeScreen> {
         final authState = context.read<AuthBloc>().state;
         List<String> availableGrades = [];
         List<String> availableSubjects = [];
+        // Student Count
         int studentCount = 35; // Default
 
+        // Priority 1: Active Context (User manually set this session/persisted)
+        if (activeContextState.studentCount != null) {
+          studentCount = activeContextState.studentCount!;
+        }
+        // Priority 2: Profile (User's default setting)
+        else if (authState is AuthAuthenticated && authState.profile != null) {
+          final profile = authState.profile!;
+          final count =
+              profile['number_of_students'] ?? profile['numberOfStudents'];
+          if (count != null) {
+            studentCount =
+                count is int ? count : int.tryParse(count.toString()) ?? 35;
+          }
+        }
+
+        // Parse Grades & Subjects from profile for options
         if (authState is AuthAuthenticated && authState.profile != null) {
           final profile = authState.profile!;
           // Parse Grades
@@ -76,13 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
           if (subjectsStr.toString().isNotEmpty) {
             availableSubjects =
                 subjectsStr.toString().split(',').map((e) => e.trim()).toList();
-          }
-          // Student Count
-          final count =
-              profile['number_of_students'] ?? profile['numberOfStudents'];
-          if (count != null) {
-            studentCount =
-                count is int ? count : int.tryParse(count.toString()) ?? 35;
           }
         }
 
@@ -264,12 +274,8 @@ class _HomeScreenState extends State<HomeScreen> {
             availableSubjects: availableSubjects,
             onContextUpdate: (grade, subject, count) {
               // Update via Cubit
-              context
-                  .read<ActiveContextCubit>()
-                  .updateContext(grade: grade, subject: subject);
-              // Note: Student count is not currently persisted/maintained in active context cubit
-              // If it needs to be updated, we might need to update profile or carry it locally/in profile bloc
-              // For now, it stays as is from profile.
+              context.read<ActiveContextCubit>().updateContext(
+                  grade: grade, subject: subject, studentCount: count);
             },
           )
               .animate()

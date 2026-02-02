@@ -169,6 +169,7 @@ class SavedStrategy(models.Model):
     RESOURCE_TYPE_CHOICES = [
         ('strategy', 'Teaching Strategy'),
         ('snap', 'Snap Solution'),
+        ('pdf', 'PDF Resource'),
     ]
     resource_type = models.CharField(
         max_length=20, 
