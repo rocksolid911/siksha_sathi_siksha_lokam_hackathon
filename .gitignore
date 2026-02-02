@@ -42,3 +42,6 @@ ShikshaLokam-HackerEarth-Competition/
 # Environment Variables
 .env
 backend/.env
+
+# Local Scripts
+backend/scripts/

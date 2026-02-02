@@ -420,40 +420,81 @@ class _LibraryScreenState extends State<LibraryScreen>
   }
 
   Widget _buildResources() {
-    final resources = _repository.getStaticResources();
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: resources.length,
-      itemBuilder: (context, index) {
-        final resource = resources[index];
-        IconData icon;
-        switch (resource['icon']) {
-          case 'book_open':
-            icon = LucideIcons.bookOpen;
-            break;
-          case 'shapes':
-            icon = LucideIcons.shapes;
-            break;
-          case 'target':
-            icon = LucideIcons.target;
-            break;
-          default:
-            icon = LucideIcons.fileText;
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: _repository.getSavedStrategies(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
         }
 
-        return ResourceCard(
-          title: resource['title'],
-          subtitle: resource['subtitle'],
-          type: resource['type'],
-          iconResult: icon,
-          color: resource['color'],
-          onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content: Text(
-                      '${AppLocalizations.of(context)!.pdfViewer} coming soon...')),
-            );
+        if (!snapshot.hasData) {
+          return Center(
+            child: Text(AppLocalizations.of(context)!.noSavedStrategies,
+                style: AppTextStyles.bodyLarge),
+          ); // Reuse string or add new one
+        }
+
+        final resources =
+            snapshot.data!.where((s) => s['type'] == 'pdf').toList();
+
+        if (resources.isEmpty) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(LucideIcons.fileText,
+                    size: 64, color: AppColors.neutral300),
+                const SizedBox(height: 16),
+                Text(
+                  'No PDF resources saved', // Could be localized
+                  style: AppTextStyles.bodyLarge,
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Text(
+                    'Search for PDFs and tap the bookmark icon to save them here.',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.bodyMedium
+                        .copyWith(color: AppColors.neutral500),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return RefreshIndicator(
+          onRefresh: () async {
+            setState(() {});
           },
+          child: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: resources.length,
+            itemBuilder: (context, index) {
+              final resource = resources[index];
+              return ResourceCard(
+                title: resource['title'] ?? 'Untitled PDF',
+                subtitle:
+                    'Class ${resource['grade'] ?? 'All'} • ${resource['subject'] ?? 'General'}', // Show metadata in subtitle
+                type: 'PDF',
+                iconResult: LucideIcons.fileText,
+                color: AppColors.primary,
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SavedStrategyDetailScreen(
+                        strategy: resource,
+                        onDelete: () => _handleDelete(resource['id']),
+                      ),
+                    ),
+                  );
+                  setState(() {});
+                },
+              );
+            },
+          ),
         );
       },
     );

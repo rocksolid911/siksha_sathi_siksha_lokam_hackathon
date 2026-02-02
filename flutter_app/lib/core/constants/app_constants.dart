@@ -14,8 +14,8 @@ class AppConstants {
   // ═══════════════════════════════════════════════════════════════════════════
   // API CONFIGURATION
   // ═══════════════════════════════════════════════════════════════════════════
-  static const String apiBaseUrl = 'http://192.168.1.45:8000/api/v1';
-  static const Duration apiTimeout = Duration(seconds: 30);
+  static const String apiBaseUrl = 'http://192.168.1.33:8000/api/v1';
+  static const Duration apiTimeout = Duration(seconds: 90);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SPACING

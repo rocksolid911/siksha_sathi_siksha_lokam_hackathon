@@ -59,6 +59,30 @@ class LibraryRepository {
     }
   }
 
+  // Save a resource (Strategy, Snap, or PDF)
+  Future<Map<String, dynamic>> saveResource(Map<String, dynamic> data) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        return {'success': false, 'error': 'User not logged in'};
+      }
+
+      final response = await _apiClient.post(
+        ApiEndpoints.savedResources,
+        data: data,
+        options: Options(
+          headers: {
+            'X-Firebase-UID': user.uid,
+          },
+        ),
+      );
+
+      return response.data;
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
+  }
+
   // Mock data for "Static Resources" (NCF, Guidelines)
   List<Map<String, dynamic>> getStaticResources() {
     return [

@@ -12,13 +12,15 @@ class ActiveContextCubit extends Cubit<ActiveContextState> {
   Future<void> loadContext() async {
     try {
       final contextData = await _preferencesRepository.getActiveContext();
-      final grade = contextData['grade'];
-      final subject = contextData['subject'];
+      final grade = contextData['grade'] as String?;
+      final subject = contextData['subject'] as String?;
+      final studentCount = contextData['studentCount'] as int?;
 
       if (grade != null && subject != null) {
         emit(state.copyWith(
           activeGrade: grade,
           activeSubject: subject,
+          studentCount: studentCount,
           isInitialized: true,
           isLoading: false,
         ));
@@ -40,14 +42,17 @@ class ActiveContextCubit extends Cubit<ActiveContextState> {
   Future<void> updateContext({
     required String grade,
     required String subject,
+    int? studentCount,
   }) async {
     await _preferencesRepository.saveActiveContext(
       grade: grade,
       subject: subject,
+      studentCount: studentCount,
     );
     emit(state.copyWith(
       activeGrade: grade,
       activeSubject: subject,
+      studentCount: studentCount,
       isInitialized: true,
     ));
   }

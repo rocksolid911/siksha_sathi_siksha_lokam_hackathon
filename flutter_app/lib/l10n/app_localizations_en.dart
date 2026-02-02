@@ -209,6 +209,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get couldNotOpenPdf => 'Could not open PDF link';
 
   @override
+  String get resourceSaved => 'Resource saved to library';
+
+  @override
+  String get failedToSave => 'Failed to save resource';
+
+  @override
+  String get saveToLibrary => 'Save to Library';
+
+  @override
   String get searchTitle => 'Search';
 
   @override

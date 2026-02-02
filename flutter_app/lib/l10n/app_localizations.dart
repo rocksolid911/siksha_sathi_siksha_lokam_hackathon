@@ -494,6 +494,24 @@ abstract class AppLocalizations {
   /// **'Could not open PDF link'**
   String get couldNotOpenPdf;
 
+  /// No description provided for @resourceSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resource saved to library'**
+  String get resourceSaved;
+
+  /// No description provided for @failedToSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save resource'**
+  String get failedToSave;
+
+  /// No description provided for @saveToLibrary.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to Library'**
+  String get saveToLibrary;
+
   /// No description provided for @searchTitle.
   ///
   /// In en, this message translates to:
